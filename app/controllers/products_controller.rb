@@ -50,6 +50,6 @@ class ProductsController < ApplicationController
   #.permit(whitelist)
 
   #other code implementation
-  params.expect(product: [ :name, :price ])
+  params.expect(product: [ :name, :price, :category_id])
   end
 end
