@@ -1,6 +1,6 @@
-<nav>
-  <%= link_to "Store", root_path%>
-  <div>
+<nav class="navbar">
+  <%= link_to "Store", root_path class:"navbar-brand"%>
+  <div class="navbar-links">
     <% if authenticated?%>
       <%= link_to "My Orders",orders_path%>
       <%= link_to "New Product", new_product_path%>
