@@ -1,0 +1,14 @@
+<h1>Order #<%= @order.id%></h1>
+<p>Placed on <%= @order.created_at.strftime("%B %d,%Y")%></p>
+
+<h2>Items</h2>
+<% @order.order_items.each do |item|%>
+  <div>
+    <p><%= item.product.name%></p>
+    <p>Qty: <%=item.quantity%></p>
+    <p><%= number_to_currency(item.price)%></p>
+  </div>
+<% end %>
+
+<p><strong>Total: <%= number_to_currency(@order.order_items.sum(:price))%></strong></p>
+<%= link_to "Back to Orders",orders_path%>
