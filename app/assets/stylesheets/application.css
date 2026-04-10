@@ -72,3 +72,19 @@ p {margin-bottom: 0.5rem;}
   background-color: #fff;
   color: #1e293b; 
 }
+
+/* Product Page Layout */
+.page-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+}
+
+/* Product Grid */
+.product-grid{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 0 2rem 2rem;
+}
