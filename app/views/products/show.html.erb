@@ -4,18 +4,23 @@
 <h1><%= @product.name %></h1>
 <p><%= number_to_currency(@product.price)%></p>
 
-<p><%= @product.category.name%></p>
-
+<p><%= @product.category&.name%></p>
+<%# form for placing order %>
 <%= form_with url: orders_path do |form| %>
   <%= form.hidden_field :product_id, value: @product.id %>
+  <%# hidden_field sends data without showing it to the user %>
   <div>
     <%= form.label :quantity, "Quantity" %>
     <%= form.number_field :quantity, value: 1, min: 1 %>
   </div>
   <%= form.submit "Order Now",
       data: { turbo_confirm: "Confirm order for #{@product.name}?" } %>
+      <%# turbo_confirm shows a browser confirmation dialog before submitting %>
 <% end %>
 
 <%= link_to "Back",products_path%>
 <%=link_to "Edit", edit_product_path(@product) if authenticated? %>
+<%# button_to for delete — generates a <form> with method: delete %>
+<%# Can't use link_to for delete: browsers only support GET natively %>
+<%# button_to submits a form with a hidden _method: delete field %>
 <%=button_to "Delete", @product, method: :delete, data: {turbo_confirm: "Are you sure?"}%>
