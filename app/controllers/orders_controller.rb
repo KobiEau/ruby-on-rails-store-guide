@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
       product = Product.find(params[:product_id])
       @order.order_items.create!(
         product: product,
-        quantity: params[:quantity] || 1,
+        quantity: params[:quantity].to_i || 1,
         price: product.price
       )
       redirect_to @order, notice: "Order placed successfully"
