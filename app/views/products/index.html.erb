@@ -4,16 +4,26 @@
         <%# <%#= product.name %> 
       <%# </a> %> 
 <%# <%= debug @products %> 
+
+<div class="page-header">
 <h1>Products</h1>
+ <%# link_to generates an <a> tag using a path helper %>
+<%# if authenticated? shows this only to logged-in users (Rails 8 auth helper) %>
 
 <%= link_to "New product", new_product_path if authenticated? %>
 <%= link_to "Login", new_session_path unless authenticated?%>
-
-<div id="products">
-  <% @products.each do |product|%>
-    <div>
-      <%= link_to product.name,product_path(product)%>
-    </div>
-    <% end %>
 </div>
 
+<div class="product-grid">
+  <% @products.each do |product|%>
+    <div class="card">
+      <%# link_to with a block wraps the block content in an <a> tag %>
+      <%= link_to product_path(product) do%>
+        <h3><%= product.name%></h3>
+        <p class="price"><%= number_to_currency(product.price)%></p>
+        <%# &. is the safe navigation operator — avoids error if category is nil %>
+        <p class="category"><%= product.category&.name%></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
