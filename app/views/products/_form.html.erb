@@ -1,6 +1,17 @@
+<%# form_with model: product — Rails inspects the object:
+    product.new_record? → true  → POST /products     (create)
+    product.new_record? → false → PATCH /products/:id (update)
+    One partial handles both new and edit. %>
+
+<%# form.object refers back to the model (@product) %>
 <%= form_with model: product do |form|%>
   <%if form.object.errors.any?%>
-    <p class="error"><%= form.object.errors.full_messages.first%></p>
+    <%# <p class="error"><%= form.object.errors.full_messages.first</p>%>
+    <div class="errors">
+      <% form.object.errors.full_messages.each do |messages|%>
+        <p><%= messages %></p>
+      <%end%>
+    </div>
   <%end%>
   <div>
     <%=form.label :name%>
@@ -9,15 +20,19 @@
 
   <div>
     <%=form.label :price%>
+    <%# step allows decimal values like 199.43 %>
     <%= form.number_field :price, step: :any %>
   </div>
 
   <div>
     <%= form.label :category_id, "Category"%>
+    <%# collection_select :field, collection, value_method, text_method %>
+    <%# loops through Category.all, saves :id, displays :name %>
     <%= form.collection_select :category_id, Category.all, :id, :name,{prompt:"Select a category"}%>
   </div>
 
   <div>
+    <%# submit label auto-changes: "Create Product" for new, "Update Product" for edit %>
     <%= form.submit%>
   </div>
 <%end%>
