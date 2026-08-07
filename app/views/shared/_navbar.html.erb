@@ -1,10 +1,11 @@
 <nav class="navbar">
-  <%= link_to "Store", root_path class:"navbar-brand"%>
+  <%= link_to "Store", root_path, class:"navbar-brand"%>
   <div class="navbar-links">
     <% if authenticated?%>
       <%= link_to "My Orders",orders_path%>
       <%= link_to "New Product", new_product_path%>
-      <%= button_to "Log Out", session_path, method: :delete%>
+       <%# button_to for logout because it needs to send a DELETE request %>
+      <%= button_to "Log Out", session_path, method: :delete, class:"btn-logout"%>
     <% else %>
       <%= link_to "Sign Up", new_user_path%>
       <%= link_to "Log In", new_session_path%>
