@@ -2,9 +2,11 @@
 <% if @orders.empty?%>
   <p>No orders yet.</p>
 <% else %>
+<%# no "=" sign on each — would print the raw collection object %>
   <% @orders.each do |order|%>
   <div>
-    <%= link_to "Order ##{order.id}", order_path(order)%>
+    <%= link_to "Order #{order.id}", order_path(order)%>
+    <%# strftime formats dates: %B=month name, %d=day, %Y=4-digit year %>
     <span><%= order.created_at.strftime("%B %d, %Y")%></span>
   </div>
   <% end %>
